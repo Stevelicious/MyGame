@@ -6,7 +6,6 @@ import com.googlecode.lanterna.terminal.Terminal;
 
 import java.nio.charset.Charset;
 
-
 /**
  * Created by Steven Hu on 2016-08-17.
  */
@@ -16,6 +15,8 @@ public class BoardLogic {
 	public static int HEIGHT;
 	private Player player;
 	private Enemy[] enemy;
+	public enum Difficulty {EASY, NORMAL, HARD};
+	
 	
 	public void createBoard(int width, int height) {
 		terminal = TerminalFacade.createTerminal(System.in, System.out, Charset.forName("UTF8"));
@@ -25,15 +26,26 @@ public class BoardLogic {
 		WIDTH = width;
 		HEIGHT = height;
 		
-		player = new Player(10,10);
+		player = new Player(10, 10);
 		enemy = Enemy.createEnemies(2);
 		
 		
 	}
 	
-	public void createGame(int numberOfEnemies){
-		player = new Player(10,10);
-		enemy = Enemy.createEnemies(numberOfEnemies);
+	public void createGame(Difficulty difficulty) {
+		player = new Player(10, 10);
+		switch (difficulty) {
+			case EASY:
+				enemy = Enemy.createEnemies(1);
+				break;
+			case NORMAL:
+				enemy = Enemy.createEnemies(5);
+				break;
+			case HARD:
+				enemy = Enemy.createEnemies(10);
+				break;
+		}
+		
 	}
 	
 	public void gamePlay() throws InterruptedException {
