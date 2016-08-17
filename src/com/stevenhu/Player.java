@@ -3,8 +3,8 @@ package com.stevenhu;
 import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.terminal.Terminal;
 
-import static com.stevenhu.Main.HEIGHT;
-import static com.stevenhu.Main.WIDTH;
+import static com.stevenhu.BoardLogic.HEIGHT;
+import static com.stevenhu.BoardLogic.WIDTH;
 
 /**
  * Created by Steven Hu on 2016-08-16.
@@ -18,7 +18,8 @@ public class Player {
 		this.y = y;
 	}
 	
-	public static void movePlayer(Player player, Terminal terminal) throws InterruptedException {
+	public static boolean movePlayer(Player player, Terminal terminal) throws InterruptedException {
+		
 		Key key;
 		do {
 			Thread.sleep(5);
@@ -28,29 +29,38 @@ public class Player {
 		
 		switch (key.getCharacter() + " " + key.getKind()) {
 			case "D ArrowDown":
+			case "s NormalKey":
 				if (player.y < HEIGHT + 1) {
 					player.y += 1;
 				}
 				break;
 			case "U ArrowUp":
+			case "w NormalKey":
 				if (player.y > 1) {
 					player.y -= 1;
 				}
 				break;
 			case "R ArrowRight":
+			case "d NormalKey":
 				if (player.x < WIDTH + 1) {
 					player.x += 1;
 				}
 				break;
 			case "L ArrowLeft":
+			case "a NormalKey":
 				if (player.x > 1) {
 					player.x -= 1;
 				}
 				break;
+			default:
+				return false;
+				
+			
 			
 			
 		}
+		return true;
 		
-		System.out.println(player.x + "   " + player.y);
+
 	}
 }

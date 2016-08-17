@@ -2,8 +2,8 @@ package com.stevenhu;
 
 import java.util.Random;
 
-import static com.stevenhu.Main.HEIGHT;
-import static com.stevenhu.Main.WIDTH;
+import static com.stevenhu.BoardLogic.HEIGHT;
+import static com.stevenhu.BoardLogic.WIDTH;
 
 /**
  * Created by Steven Hu on 2016-08-16.
@@ -19,8 +19,8 @@ public class Enemy {
 	
 	
 	
-	public static Enemy[] createNEnemies(int n){
-		Enemy[] enemies = new Enemy[n];
+	public static Enemy[] createEnemies(int numberOfEnemies){
+		Enemy[] enemies = new Enemy[numberOfEnemies];
 		Random rand = new Random();
 		for (int i = 0; i < enemies.length; i++) {
 //			Spawn enemies at random locations
