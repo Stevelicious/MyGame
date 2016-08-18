@@ -12,13 +12,14 @@ import static com.stevenhu.BoardLogic.WIDTH;
 public class Player {
 	public int x;
 	public int y;
+	public int health = 5;
 	
 	public Player(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 	
-	public static boolean movePlayer(Player player, Terminal terminal) throws InterruptedException {
+	public static boolean movePlayer(Player player, Terminal terminal, boolean[][] board) throws InterruptedException {
 		
 		Key key;
 		do {
@@ -30,25 +31,25 @@ public class Player {
 		switch (key.getCharacter() + " " + key.getKind()) {
 			case "D ArrowDown":
 			case "s NormalKey":
-				if (player.y < HEIGHT + 1) {
+				if (!board[player.x][player.y+1]) {
 					player.y += 1;
 				}
 				break;
 			case "U ArrowUp":
 			case "w NormalKey":
-				if (player.y > 1) {
+				if (!board[player.x][player.y-1]) {
 					player.y -= 1;
 				}
 				break;
 			case "R ArrowRight":
 			case "d NormalKey":
-				if (player.x < WIDTH + 1) {
+				if (!board[player.x+1][player.y]) {
 					player.x += 1;
 				}
 				break;
 			case "L ArrowLeft":
 			case "a NormalKey":
-				if (player.x > 1) {
+				if (!board[player.x-1][player.y]) {
 					player.x -= 1;
 				}
 				break;

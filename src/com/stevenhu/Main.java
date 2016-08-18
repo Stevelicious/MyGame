@@ -1,16 +1,18 @@
 package com.stevenhu;
 
 
+import java.io.FileNotFoundException;
+
 public class Main {
 	
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, FileNotFoundException {
 
 		BoardLogic board = new BoardLogic();
-		board.createBoard(98, 28);
+		board.createBoard(98, 27);
 		
 		while (true) {
 			
-			board.createGame(BoardLogic.Difficulty.HARD);
+			board.createGame(BoardLogic.Difficulty.EASY);
 		
 //		    Gameplay
 			while (!board.isGameOver()) {
