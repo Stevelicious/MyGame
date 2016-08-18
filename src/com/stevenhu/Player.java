@@ -19,7 +19,7 @@ public class Player {
 		this.y = y;
 	}
 	
-	public static boolean movePlayer(Player player, Terminal terminal, boolean[][] board) throws InterruptedException {
+	public static boolean movePlayer(Player player, Terminal terminal, int[][] board) throws InterruptedException {
 		
 		Key key;
 		do {
@@ -31,37 +31,43 @@ public class Player {
 		switch (key.getCharacter() + " " + key.getKind()) {
 			case "D ArrowDown":
 			case "s NormalKey":
-				if (!board[player.x][player.y+1]) {
+				if (board[player.x][player.y + 1] == 0) {
+					board[player.x][player.y] = 0;
 					player.y += 1;
+					board[player.x][player.y] = 1;
 				}
 				break;
 			case "U ArrowUp":
 			case "w NormalKey":
-				if (!board[player.x][player.y-1]) {
+				if (board[player.x][player.y - 1] == 0) {
+					board[player.x][player.y] = 0;
 					player.y -= 1;
+					board[player.x][player.y] = 1;
 				}
 				break;
 			case "R ArrowRight":
 			case "d NormalKey":
-				if (!board[player.x+1][player.y]) {
+				if (board[player.x + 1][player.y] == 0) {
+					board[player.x][player.y] = 0;
 					player.x += 1;
+					board[player.x][player.y] = 1;
 				}
 				break;
 			case "L ArrowLeft":
 			case "a NormalKey":
-				if (!board[player.x-1][player.y]) {
+				if (board[player.x - 1][player.y] == 0) {
+					board[player.x][player.y] = 0;
 					player.x -= 1;
+					board[player.x][player.y] = 1;
 				}
 				break;
 			default:
 				return false;
-				
-			
 			
 			
 		}
 		return true;
 		
-
+		
 	}
 }

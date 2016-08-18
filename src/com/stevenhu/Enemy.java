@@ -29,23 +29,31 @@ public class Enemy {
 		return enemies;
 	}
 	
-	public static void enemyLogic(Player player, Enemy[] enemy, boolean[][] board) {
+	public static void enemyLogic(Player player, Enemy[] enemy, int[][] board) {
 		
 		for (int i = 0; i < enemy.length; i++) {
 			int dx = player.x - enemy[i].x;
 			int dy = player.y - enemy[i].y;
 			
-			if (Math.abs(dx) <= Math.abs(dy)) {
-				if (dy < 0 && !board[enemy[i].x][enemy[i].y - 1]) {
+			if (Math.abs(dy) > 0) {
+				if (dy < 0 && (board[enemy[i].x][enemy[i].y - 1] == 0 || board[enemy[i].x][enemy[i].y - 1] == 1)) {
+					board[enemy[i].x][enemy[i].y] = 0;
 					enemy[i].y -= 1;
-				} else if (dy > 0 && !board[enemy[i].x][enemy[i].y + 1]) {
+					board[enemy[i].x][enemy[i].y] = 2;
+				} else if (dy > 0 && (board[enemy[i].x][enemy[i].y + 1] == 0 || board[enemy[i].x][enemy[i].y - 1] == 1)) {
+					board[enemy[i].x][enemy[i].y] = 0;
 					enemy[i].y += 1;
+					board[enemy[i].x][enemy[i].y] = 2;
 				}
-			} else {
-				if (dx < 0 && !board[enemy[i].x - 1][enemy[i].y]) {
+			} else if (Math.abs(dx) > 0) {
+				if (dx < 0 && (board[enemy[i].x - 1][enemy[i].y] == 0 || board[enemy[i].x][enemy[i].y - 1] == 1)) {
+					board[enemy[i].x][enemy[i].y] = 0;
 					enemy[i].x -= 1;
-				} else if (dx > 0 && !board[enemy[i].x + 1][enemy[i].y]) {
+					board[enemy[i].x][enemy[i].y] = 2;
+				} else if (dx > 0 && (board[enemy[i].x + 1][enemy[i].y] == 0 || board[enemy[i].x][enemy[i].y - 1] == 1)) {
+					board[enemy[i].x][enemy[i].y] = 0;
 					enemy[i].x += 1;
+					board[enemy[i].x][enemy[i].y] = 2;
 				}
 			}
 		}
