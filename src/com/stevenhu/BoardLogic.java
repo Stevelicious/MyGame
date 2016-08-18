@@ -18,29 +18,36 @@ public class BoardLogic {
 	public static int HEIGHT; //max 27
 	private Player player;
 	private Enemy[] enemy;
-	public boolean[][] board = new boolean[100][30];
-	public enum Difficulty {EASY, NORMAL, HARD};
+	public int[][] board = new int[100][30];
+	
+	public enum Difficulty {EASY, NORMAL, HARD}
+	
+	;
 	
 	public void readFile() throws FileNotFoundException {
 		Scanner file = new Scanner(new File("level_1.txt"));
 		int j = 0;
 		
-		while (file.hasNext()){
+		while (file.hasNext()) {
 			String row = file.nextLine();
 			
 			for (int i = 0; i < row.length(); i++) {
-				if (row.charAt(i) != ' ')
-				board[i][j] = true;
+				if (row.charAt(i) == '\u2588') {
+					board[i][j] = -1;
+				} else {
+					board[i][j] = 0;
+				}
+				
 			}
 			j++;
 		}
 	}
 	
-	private void drawBoard(){
+	private void drawBoard() {
 		for (int i = 0; i < board.length; i++) {
 			for (int j = 0; j < board[i].length; j++) {
-				if (board[i][j]){
-					terminal.moveCursor(i,j);
+				if (board[i][j] == -1) {
+					terminal.moveCursor(i, j);
 					terminal.putCharacter('\u2588');
 				}
 			}
@@ -54,7 +61,7 @@ public class BoardLogic {
 		terminal.setCursorVisible(false);
 		
 		readFile();
-
+		
 		
 		WIDTH = width;
 		HEIGHT = height;
@@ -66,6 +73,7 @@ public class BoardLogic {
 	
 	public void createGame(Difficulty difficulty) {
 		player = new Player(10, 10);
+		board[player.x][player.y] = 1;
 		switch (difficulty) {
 			case EASY:
 				enemy = Enemy.createEnemies(1);
@@ -76,6 +84,11 @@ public class BoardLogic {
 			case HARD:
 				enemy = Enemy.createEnemies(10);
 				break;
+		}
+		
+		for (Enemy e :
+				enemy) {
+			board[e.x][e.y] = 2;
 		}
 		
 	}
@@ -96,13 +109,13 @@ public class BoardLogic {
 		terminal.clearScreen();
 		
 		drawBoard();
-		
+
 //		Draw player
 		terminal.moveCursor(player.x, player.y);
 		terminal.putCharacter('\u263A');
-		
+
 //		Draw player info
-		
+
 
 //		Draw enemies
 		for (int i = 0; i < enemy.length; i++) {
@@ -112,7 +125,7 @@ public class BoardLogic {
 		}
 		
 	}
-
+	
 	public boolean isGameOver() {
 		for (int i = 0; i < enemy.length; i++) {
 			if (player.x - enemy[i].x == 0 && player.y - enemy[i].y == 0) {
