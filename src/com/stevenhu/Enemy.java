@@ -40,17 +40,17 @@ public class Enemy {
 					board[enemy[i].x][enemy[i].y] = 0;
 					enemy[i].y -= 1;
 					board[enemy[i].x][enemy[i].y] = 2;
-				} else if (dy > 0 && (board[enemy[i].x][enemy[i].y + 1] == 0 || board[enemy[i].x][enemy[i].y - 1] == 1)) {
+				} else if (dy > 0 && (board[enemy[i].x][enemy[i].y + 1] == 0 || board[enemy[i].x][enemy[i].y + 1] == 1)) {
 					board[enemy[i].x][enemy[i].y] = 0;
 					enemy[i].y += 1;
 					board[enemy[i].x][enemy[i].y] = 2;
 				}
 			} else if (Math.abs(dx) > 0) {
-				if (dx < 0 && (board[enemy[i].x - 1][enemy[i].y] == 0 || board[enemy[i].x][enemy[i].y - 1] == 1)) {
+				if (dx < 0 && (board[enemy[i].x - 1][enemy[i].y] == 0 || board[enemy[i].x - 1][enemy[i].y] == 1)) {
 					board[enemy[i].x][enemy[i].y] = 0;
 					enemy[i].x -= 1;
 					board[enemy[i].x][enemy[i].y] = 2;
-				} else if (dx > 0 && (board[enemy[i].x + 1][enemy[i].y] == 0 || board[enemy[i].x][enemy[i].y - 1] == 1)) {
+				} else if (dx > 0 && (board[enemy[i].x + 1][enemy[i].y] == 0 || board[enemy[i].x + 1][enemy[i].y] == 1)) {
 					board[enemy[i].x][enemy[i].y] = 0;
 					enemy[i].x += 1;
 					board[enemy[i].x][enemy[i].y] = 2;

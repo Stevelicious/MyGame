@@ -22,7 +22,7 @@ public class BoardLogic {
 	
 	public enum Difficulty {EASY, NORMAL, HARD}
 	
-	;
+	
 	
 	public void readFile() throws FileNotFoundException {
 		Scanner file = new Scanner(new File("level_1.txt"));
